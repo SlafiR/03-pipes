@@ -12,6 +12,13 @@
                 </tr>
             </thead>
             <tbody>
+
+                <tr>
+                    <td>{{ nombre2 }}</td>
+                    <td> capitalizado</td>
+                    <td>{{ nombre2 | capitalizado:false }}</td>
+                </tr>
+
                 <tr>
                     <td>{{ nombre }}</td>
                     <td> UpperCase</td>
@@ -24,7 +31,154 @@
                     <td>{{ nombre | lowercase }}</td>
                 </tr>
 
+                <tr>
+                    <td>{{ nombre }}</td>
+                    <td> Slice:3</td>
+                    <td>{{ nombre | slice:3 }}</td>
+                </tr>
+
+                <tr>
+                    <td>{{ nombre }}</td>
+                    <td> Slice:0:3</td>
+                    <td>{{ nombre | slice:0:3 }}</td>
+                </tr>
+
+                <tr>
+                    <td>{{ arreglo }}</td>
+                    <td> Slice:1:5</td>
+                    <td>{{ arreglo | slice:1:5 }}</td>
+                </tr>
+
+                <tr>
+                    <td>{{ pi }}</td>
+                    <td> number </td>
+                    <td>{{ pi | number:'3.0-0' }}</td>
+                </tr>
+
+                <tr>
+                    <td>{{ pi }}</td>
+                    <td> number:'.0-14' </td>
+                    <td>{{ pi | number:'.0-14' }}</td>
+                </tr>
+
+                <tr>
+                    <td>{{ porcentaje }}</td>
+                    <td> percent </td>
+                    <td>{{ porcentaje | percent }}</td>
+                </tr>
+
+                <tr>
+                    <td>{{ porcentaje }}</td>
+                    <td> percent:'2.2-2' </td>
+                    <td>{{ porcentaje | percent:'2.2-2' }}</td>
+                    <!-- Dos pociciones enteras y dos decimales de percent -->
+                </tr>
+
+                <tr>
+                    <td>{{ salario }}</td>
+                    <td> CurrencyPipe </td>
+                    <td>{{ salario | currency }}</td>
+                </tr>
+
+                <tr>
+                    <td>{{ salario }}</td>
+                    <td> CurrencyPipe:'JPY' </td>
+                    <td>{{ salario | currency:'JPY' }}</td>
+                </tr>
+
+                <tr>
+                    <td>{{ salario }}</td>
+                    <td> CurrencyPipe:'CAD':'symbol-narrow':'.0-0' </td>
+                    <td>{{ salario | currency:'CAD $':'symbol-narrow':'.0-0' }}</td>
+                </tr>
+
+                <tr>
+                    <td>{{ valorPromesa }}</td>
+                    <td> async </td>
+                    <td>{{ valorPromesa | async}}</td>
+                </tr>
+
+                <tr>
+                    <td>{{ fecha }}</td>
+                    <td> date </td>
+                    <td>{{ fecha | date }}</td>
+                </tr>
+
+                <tr>
+                    <td>{{ fecha }}</td>
+                    <td> date:'medium' </td>
+                    <td>{{ fecha | date:'medium' }}</td>
+                </tr>
+
+                <tr>
+                    <td>{{ fecha }}</td>
+                    <td> date:'short' </td>
+                    <td>{{ fecha | date:'short' }}</td>
+                </tr>
+
+                <tr>
+                    <td>{{ fecha }}</td>
+                    <td> date:personalizado 'MMMM - dd' </td>
+                    <td>{{ fecha | date:'MMMM - dd' }}</td>
+                </tr>
+
+                <tr>
+                    <td>{{ fecha }}</td>
+                    <td> date:personalizado 'MMMM - dd':'':'en' </td>
+                    <td>{{ fecha | date:'MMMM - dd':'':'en' }}</td>
+                    <!-- Cambio de idioma de manera local o sectorizada -->
+                    <!-- si busco agregar otro idioma, tendra que instalarlo en el app.module.ts -->
+                </tr>
+
+                <tr>
+                    <td>{{ fecha }}</td>
+                    <td> date:personalizado 'MMMM - dd':'':'{{ idioma }}'
+                        <br>
+                        <button (click)="idioma='es'" class="mr-2 btn btn-primary">Español</button>
+                        <button (click)="idioma='en'" class="mr-2 btn btn-primary">Ingles</button>
+                        <button (click)="idioma='fr'" class="mr-2 btn btn-primary">Frances</button>
+                    </td>
+                    <td>{{ fecha | date:'MMMM - dd':'':idioma }}</td>
+                </tr>
+
+                <tr>
+                    <td>{{ nombre }}</td>
+                    <td>
+                        contraseña:{{activar}}
+                        <br>
+                        <button (click)="activar = !activar" class="btn btn-outline-primary"> Activar/Desactivar</button>
+                    </td>
+                    <td>{{ nombre | contrasenia:activar }}</td>
+                </tr>
+
             </tbody>
         </table>
+
+        <h4>Slice</h4>
+        <ul>
+            <li *ngFor="let item of arreglo | slice:5:20"> {{ item }}</li>
+        </ul>
+
+        <h3>JSON</h3>
+        <hr>
+        <div class="row mb-5">
+            <div class="col">
+                {{ heroe }} <br>
+                <!-- Aqui, nos debera mostrar [object Object], es decir, esta es la representacion de un objeto al hacer {}.toString(); -->
+                {{ heroe | json}}
+                <pre> <!-- con pre, podremos hacer que un objeto json se vea mas organizado con sus respectivas tabulaciones. -->
+                    {{ heroe | json}}
+                </pre>
+            </div>
+        </div>
+
+        <h2 class="mt-4">Dom Seguro</h2>
+        <div class="row mb-5">
+            <div class="col">
+                <iframe width="560" height="315" [src]="videoUrl | domseguro" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen>
+            </iframe>
+            </div>
+        </div>
+
     </div>
 </div>
